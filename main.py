@@ -11,6 +11,7 @@ init()
 config = {
     "speech":False,
     "speech_language": "ru",
+    "microphone": False,
     "translate": True,
     "speeker":4
 }
@@ -71,6 +72,7 @@ def text_to_speech(text):
 
 def speech_to_text():
     recognizer = sr.Recognizer()
+
     try:
         with sr.Microphone() as source:
             print("Waiting for speech...")
@@ -178,44 +180,42 @@ def run():
     print(config)
 
     while True:
-        try:
+        if(config['microphone']==True):
             spokenTxt = speech_to_text()
-            inputTxt = input(f'{Fore.BLUE}You: ')                    
+        else:
+            inputTxt = input(f'{Fore.BLUE}You: ')
 
-            if(inputTxt):
-               spoken_text = inputTxt
-            elif(spokenTxt):
-                spoken_text = spokenTxt
-                
-
-            if(spoken_text == 'exit'):
-                break
-
-            if(spoken_text == 'date time'):
-                datetime = show_datetime()
-                print(datetime)
-                text_to_speech(datetime)
-                continue
-
-            # first_word = spoken_text.split(" ")[0]
-            if(len(spoken_text.split()) > 2):
-                spoken_text = spoken_text.split(' ', 1)[1]
-
-            AiResponsTxt_en = getAiResponse(spoken_text)
-            print(f'{Fore.GREEN}'+AiResponsTxt_en)
+        if(inputTxt):
+            spoken_text = inputTxt
             
-            if(config['translate']==True):
-                AiResponsTxt_ru = google_translate(AiResponsTxt_en)
-                print(f'{Fore.YELLOW}'+ AiResponsTxt_ru)
+        elif(spokenTxt):
+            spoken_text = spokenTxt
+
+        if(spoken_text == 'exit'):
+            break
+
+        if(spoken_text == 'date time'):
+            datetime = show_datetime()
+            print(datetime)
+            text_to_speech(datetime)
+            continue
+
+        # first_word = spoken_text.split(" ")[0]
+        if(len(spoken_text.split()) > 2):
+            spoken_text = spoken_text.split(' ', 1)[1]
+
+        AiResponsTxt_en = getAiResponse(spoken_text)
+        print(f'{Fore.GREEN}'+AiResponsTxt_en)
             
-                if(config['speech']==True and config['speech_language']=='en'):
-                    text_to_speech(AiResponsTxt_en)
+        if(config['translate']==True):
+            AiResponsTxt_ru = google_translate(AiResponsTxt_en)
+            print(f'{Fore.YELLOW}'+ AiResponsTxt_ru)
+            
+        if(config['speech']==True and config['speech_language']=='en'):
+            text_to_speech(AiResponsTxt_en)
 
-                if(config['speech']==True and config['speech_language']=='ru'):
-                    text_to_speech(AiResponsTxt_ru)                
-
-        except Exception as e:
-            print(e)    
+        if(config['speech']==True and config['speech_language']=='ru'):
+            text_to_speech(AiResponsTxt_ru)    
 
 
 

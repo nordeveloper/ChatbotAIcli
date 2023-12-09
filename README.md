@@ -2,6 +2,12 @@
 
 Welcome to the Chatbot Assistant, a Python script utilizing OpenAI's GPT model for natural language generation. This chatbot is equipped with features such as speech recognition, text-to-speech synthesis, and translation.
 
+## Installation
+
+Make sure to install the required dependencies before running the script:
+
+## pip install -r requirements.txt
+
 ## Features
 
 - **Speech Interaction:** Allows users to interact with the chatbot through both text input and speech recognition.
@@ -22,16 +28,11 @@ The script currently supports the following AI models:
 For more information on supported models and pricing, refer to the [OpenRouter AI documentation](https://openrouter.ai/docs#routes).
 
 ## Usage
-
-1. Run the script.
-2. Interact with the chatbot using text input or speech.
+1. Create api_key.txt file and add your AI API KEY
+1. Run the Start ChatBotsAI.bat
+2. Interact with the chatbot using text input or speech or CLI Input
 3. Explore various functionalities such as date and time display, multilingual support, and AI-generated responses.
 
-## Dependencies
-
-Make sure to install the required dependencies before running the script:
-
-## pip install -r requirements.txt
 
 ## License
 This project is licensed under the MIT License.
